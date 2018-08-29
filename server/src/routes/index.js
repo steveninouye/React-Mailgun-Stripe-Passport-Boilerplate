@@ -4,6 +4,7 @@ import classesRouter from './classes';
 import authRouter from './auth';
 import usersRouter from './users';
 import stripeDonationsRouter from './stripeDonations';
+import contactRouter from './contactForm';
 import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
 let router = Router();
@@ -15,8 +16,10 @@ router.use('/auth', authRouter);
 // we would need to move this line below the middle ware in this file
 // router.route('*').post(tokenMiddleware, isLoggedIn).put(tokenMiddleware, isLoggedIn).delete(tokenMiddleware, isLoggedIn);
 router.use('/donate', stripeDonationsRouter);
+router.user('/contact', contactRouter);
 
-router.route('*')
+router
+    .route('*')
     .post(tokenMiddleware, isLoggedIn)
     .put(tokenMiddleware, isLoggedIn)
     .delete(tokenMiddleware, isLoggedIn);
